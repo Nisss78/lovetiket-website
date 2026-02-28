@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Love Ticket - カップル向けデート計画アプリ</title>
+  <meta name="description" content="TinderスタイルのスワイプUIでデート提案を閲覧し、パートナーと一緒にデート計画を立てよう">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #FF6B9D;
+      --primary-dark: #E91E63;
+      --secondary: #7C4DFF;
+      --bg: #FFF5F8;
+      --text: #333;
+      --text-light: #666;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Header */
+    header {
+      padding: 20px 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    .download-btn {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 10px 24px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(255,107,157,0.4);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      background: linear-gradient(180deg, #FFF5F8 0%, #FFF 100%);
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-light);
+      max-width: 500px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Features */
+    .features {
+      padding: 80px 0;
+    }
+
+    .features h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 50px;
+      color: var(--text);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .feature-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+      color: var(--primary-dark);
+    }
+
+    .feature-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* How to Use */
+    .howto {
+      padding: 80px 0;
+      background: white;
+    }
+
+    .howto h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 50px;
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .step {
+      text-align: center;
+      max-width: 200px;
+    }
+
+    .step-number {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 20px;
+    }
+
+    .step h3 {
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .step p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* CTA */
+    .cta {
+      padding: 80px 0;
+      text-align: center;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+    }
+
+    .cta h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta p {
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta .btn {
+      background: white;
+      color: var(--primary);
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: var(--text-light);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .features h2, .howto h2 {
+        font-size: 1.6rem;
+      }
+
+      .steps {
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="#" class="logo">Love<span>Ticket</span></a>
+      <a href="#" class="download-btn">アプリをダウンロード</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>二人のデート、もっと楽しく</h1>
+      <p>スワイプでデート案を選んで、パートナーと一緒に素敵な思い出を計画しよう</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">App Store</a>
+        <a href="#" class="btn btn-secondary">Google Play</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <h2>主な機能</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">👆</div>
+          <h3>スワイプでデート案選び</h3>
+          <p>TinderスタイルのスワイプUIで直感的にデート案を評価。「気になる」「超いいね」「スキップ」の3つのアクション</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎟️</div>
+          <h3>チケット管理</h3>
+          <p>気に入ったデート案をチケットとして保存。カテゴリ別に整理して、いつでもデート計画を立てられる</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📅</div>
+          <h3>スケジュール調整</h3>
+          <p>パートナーと日程を共有。カレンダーで予定を確認して、最適な日を選ぼう</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🤖</div>
+          <h3>AIスポット提案</h3>
+          <p>希望を入力するだけで、AIがおすすめのデートスポットを3件提案。新しい発見があるかも</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👫</div>
+          <h3>パートナー連携</h3>
+          <p>QRコードまたはIDで簡単に連携。二人だけの特別な空間でデートを計画</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>デートカタログ</h3>
+          <p>多彩なカテゴリからデート案を閲覧。自分たちだけのオリジナルデート案も作成できる</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="howto">
+    <div class="container">
+      <h2>使い方はかんたん</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>ダウンロード</h3>
+          <p>アプリをインストールしてアカウント作成</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>パートナーと連携</h3>
+          <p>QRコードかIDで二人を繋ぐ</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>スワイップで選ぶ</h3>
+          <p>気になるデート案をスワイプ</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>デートを計画</h3>
+          <p>日程を決めて素敵な思い出を</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="container">
+      <h2>今日から始めよう</h2>
+      <p>二人のデートライフをもっと楽しく、もっと特別に</p>
+      <a href="#" class="btn">今すぐダウンロード</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="support.html">サポート</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="terms.html">利用規約</a>
+        <a href="tokushoho.html">特定商取引法</a>
+      </div>
+      <p>&copy; 2026 Love Ticket. <a href="https://github.com/AbeShohei/love-ticket">GitHub</a></p>
+    </div>
+  </footer>
+</body>
+</html>

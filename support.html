@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サポート - Love Ticket</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', sans-serif;
+            background: #FFF5F8;
+            color: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 640px; margin: 0 auto; }
+        .back { color: #FF6B9D; text-decoration: none; font-size: 14px; display: inline-flex; align-items: center; gap: 8px; margin-bottom: 32px; }
+        .back:hover { text-decoration: underline; }
+        h1 { font-size: 32px; margin-bottom: 8px; background: linear-gradient(135deg, #FF6B9D, #7C4DFF); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .subtitle { color: #666; margin-bottom: 40px; }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        h2 { font-size: 18px; margin-bottom: 12px; color: #E91E63; }
+        p { color: #666; line-height: 1.8; margin-bottom: 12px; }
+        a { color: #FF6B9D; }
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #FF6B9D, #7C4DFF);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255,107,157,0.4);
+        }
+        .faq-item { border-bottom: 1px solid #f0f0f0; padding: 20px 0; }
+        .faq-item:last-child { border-bottom: none; padding-bottom: 0; }
+        .faq-item h3 { font-size: 15px; margin-bottom: 8px; color: #333; }
+        .faq-item p { font-size: 14px; margin-bottom: 0; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back">← ホームに戻る</a>
+        <h1>サポート</h1>
+        <p class="subtitle">Love Ticketに関するお問い合わせ</p>
+
+        <div class="card">
+            <h2>お問い合わせ</h2>
+            <p>ご質問、不具合報告、ご要望などがございましたら、お気軽にお問い合わせください。</p>
+            <a href="mailto:support@lovetiket.net" class="contact-btn">メールで問い合わせる</a>
+        </div>
+
+        <div class="card">
+            <h2>よくある質問</h2>
+
+            <div class="faq-item">
+                <h3>Q. パートナーと連携するには？</h3>
+                <p>マイページから「パートナー連携」を選択し、QRコードをスキャンするか、パートナーIDを入力して連携できます。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q. デート案を追加するには？</h3>
+                <p>カタログタブからカテゴリを選んで、右上の「+」ボタンから新しいデート案を作成できます。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q. AIスポット提案機能とは？</h3>
+                <p>カテゴリと希望を入力すると、AIがおすすめのデートスポットを3件提案します。無料で5回まで利用可能です。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q. チケット（マッチ）とは？</h3>
+                <p>スワイプで「気になる」または「超いいね」を選んだデート案はチケットとして保存されます。そこからデート計画を立てられます。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q. アカウントを削除したい</h3>
+                <p>マイページの設定からアカウント削除が可能です。削除後はすべてのデータが消去されます。</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Q. 通知が届かない</h3>
+                <p>端末の設定 > Love Ticket > 通知 から通知を許可してください。また、アプリ内の通知設定もご確認ください。</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
